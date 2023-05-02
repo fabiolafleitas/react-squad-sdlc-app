@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "format": "prettier --write src",
     "lint": "eslint --fix --ext .js,.jsx src",
+    "lint-check": "eslint --ext .js,.jsx .",
     "test": "vitest",
     "test-no-watch": "vitest run",
     "test-coverage": "vitest run --coverage",
