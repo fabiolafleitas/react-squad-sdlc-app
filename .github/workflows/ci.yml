@@ -77,10 +77,30 @@ jobs:
 
       - name: Execute tests
         run: npm run test
+  
+  coverage:
+    needs: [test]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to the repository
+        uses: actions/checkout@v3
+
+      - name: Setup NodeJS environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      
+      - name: Install package dependencies
+        run: npm ci         
+
+      - name: Execute tests
+        run: npm run test-coverage
 
   deploy:
     if: github.event_name == 'push'
-    needs: [test]
+    needs: [coverage]
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
